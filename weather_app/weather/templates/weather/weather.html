@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.css" />
+    <title>What's the weather like?</title>
+</head>
+<body>
+    <form  method="POST">
+    {% csrf_token %}
+        {{form.name}}
+        <input type="submit" value="Submit"  class="button is-primary is-rounded" style="display:inline;margin-top:1rem;margin-bottom:1rem;">
+
+    </form>
+    {% if message %}
+        <div class="notification {{message_class}}" style="width:250px;">{{message}}</div>
+    {% endif %}
+    {% for city_weather in weather_data %}
+        &nbsp;
+        <div class="content" style="display:inline-block;">
+            <p>
+                <img src="http://openweathermap.org/img/wn/{{city_weather.icon}}.png" alt="">
+                <br>
+                <span class="title">{{city_weather.city}}</span>
+                <br>
+                <span class="subtitle">{{city_weather.temperature}}° F</span>
+                <br>{{city_weather.description}}
+            </p>
+            <p>
+            </p>
+        </div>
+    {% endfor %}
+            
+</body>
+</html>
